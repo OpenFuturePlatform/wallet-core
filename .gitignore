@@ -63,3 +63,8 @@ samples/cpp/sample
 
 *.xcuserdatad/
 
+/openplatform/Makefile
+/openplatform/libtrust-core-jvm.dylib
+/openplatform/CMakeCache.txt
+/openplatform/cmake_install.cmake
+/openplatform/CMakeFiles/
