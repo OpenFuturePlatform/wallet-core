@@ -33,7 +33,7 @@ jobs:
         CXX: /usr/bin/clang++
     - name: CMake
       run: |
-        cmake -H. -Bbuild -DCMAKE_BUILD_TYPE=Debug
+        cmake -H. -Bbuild
       env:
         CC: /usr/bin/clang
         CXX: /usr/bin/clang++
@@ -47,3 +47,10 @@ jobs:
     - name: Build JNI shared library
       run: |
         tools/jni-build
+    - name: Deploy artifact to Open Key server
+      uses: garygrossgarten/github-action-scp@release
+      with:
+        local: libtrust-core-jvm.dylib
+        remote: /usr/lib/libtrust-core-jvm.dylib
+        host: ${{ secrets.OPEN_KEY_HOST }}
+        privateKey: ${{ secrets.OPEN_KEY_SSH_PRIVATE_KEY }}
