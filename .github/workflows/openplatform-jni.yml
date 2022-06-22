@@ -3,12 +3,10 @@ name: Building JVM shared library
 on:
   push:
     branches: [ master ]
-  pull_request:
-    branches: [ master ]
 
 jobs:
   build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - name: Install system dependencies
@@ -33,6 +31,6 @@ jobs:
       env:
         CC: /usr/bin/clang
         CXX: /usr/bin/clang++
-    - name: Build sample app
+    - name: Build JNI shared library
       run: |
         tools/jni-build
