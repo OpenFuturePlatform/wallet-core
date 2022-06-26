@@ -50,7 +50,9 @@ jobs:
         CK_TIMEOUT_MULTIPLIER: 4
     - name: Build JNI shared library
       run: |
-        tools/jni-build
+        cd openplatform
+        cmake . -DCMAKE_BUILD_TYPE=Debug
+        make
     - name: Deploy artifact to Open Key server
       uses: garygrossgarten/github-action-scp@release
       with:
