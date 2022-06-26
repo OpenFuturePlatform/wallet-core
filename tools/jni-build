@@ -4,6 +4,6 @@ set -e
 
 cd openplatform
 echo "Building JNI shared library:"`pwd`
-cmake . -DWALLET_CORE=../
+cmake .
 make
 echo "Building JNI shared library: done"
