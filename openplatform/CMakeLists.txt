@@ -5,7 +5,7 @@ set(WALLET_CORE "../")
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-set (CMAKE_C_STANDARD 11)
+set (CMAKE_C_STANDARD 13)
 set (CMAKE_C_STANDARD_REQUIRED ON)
 
 include_directories (${CMAKE_SOURCE_DIR} ${WALLET_CORE}/include ${WALLET_CORE}/src ${WALLET_CORE}/build/local/include)
