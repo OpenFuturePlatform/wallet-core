@@ -19,19 +19,19 @@ jobs:
         java-version: 11
     - name: Install system dependencies
       run: |
-        sudo apt-get update && sudo apt-get install ninja-build libboost-all-dev --fix-missing
+        sudo apt-get update && sudo apt-get install llvm-11 clang-11 ninja-build libboost-all-dev --fix-missing
 #    - name: Cache internal dependencies
 #      id: internal_cache
 #      uses: actions/cache@v1.1.2
 #      with:
 #        path: build/local
 #        key: ${{ runner.os }}-internal-${{ hashFiles('tools/install-dependencies') }}
-#    - name: Install internal dependencies
-#      run: |
-#        tools/install-dependencies
-#      env:
-#        CC: /usr/bin/clang
-#        CXX: /usr/bin/clang++
+    - name: Install internal dependencies
+      run: |
+        tools/install-dependencies
+      env:
+        CC: /usr/bin/clang
+        CXX: /usr/bin/clang++
 #      if: steps.internal_cache.outputs.cache-hit != 'true'
     - name: Code generation
       run: |
