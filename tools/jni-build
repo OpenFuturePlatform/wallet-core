@@ -7,4 +7,3 @@ echo "Building JNI shared library:"`pwd`
 cmake . -DWALLET_CORE=../
 make
 echo "Building JNI shared library: done"
-popd
