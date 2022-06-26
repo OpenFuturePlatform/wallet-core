@@ -48,15 +48,24 @@ jobs:
         CC: /usr/bin/clang
         CXX: /usr/bin/clang++
         CK_TIMEOUT_MULTIPLIER: 4
-    - name: Build JNI shared library
+    - name: Build and run C++ sample app
       run: |
-        cd openplatform
-        cmake . -DCMAKE_BUILD_TYPE=Debug
+        cd samples/cpp
+        cmake . -DWALLET_CORE=../../ -DCMAKE_BUILD_TYPE=Debug
         make
-    - name: Deploy artifact to Open Key server
-      uses: garygrossgarten/github-action-scp@release
-      with:
-        local: libtrust-core-jvm.dylib
-        remote: /usr/lib/libtrust-core-jvm.dylib
-        host: ${{ secrets.OPEN_KEY_HOST }}
-        privateKey: ${{ secrets.OPEN_KEY_SSH_PRIVATE_KEY }}
+        ./sample
+      env:
+        CC: /usr/bin/clang
+        CXX: /usr/bin/clang++
+#    - name: Build JNI shared library
+#      run: |
+#        cd openplatform
+#        cmake . -DCMAKE_BUILD_TYPE=Debug
+#        make
+#    - name: Deploy artifact to Open Key server
+#      uses: garygrossgarten/github-action-scp@release
+#      with:
+#        local: libtrust-core-jvm.dylib
+#        remote: /usr/lib/libtrust-core-jvm.dylib
+#        host: ${{ secrets.OPEN_KEY_HOST }}
+#        privateKey: ${{ secrets.OPEN_KEY_SSH_PRIVATE_KEY }}
