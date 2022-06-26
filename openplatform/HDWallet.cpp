@@ -2,6 +2,14 @@
 #include <jni.h>
 /* Header for class io_openfuture_trustwallet_HDWallet */
 
+#include <iostream>
+#include <TrustWalletCore/TWCoinType.h>
+#include <TrustWalletCore/TWAnySigner.h>
+#include <TrustWalletCore/TWCoinTypeConfiguration.h>
+#include <TrustWalletCore/TWHDWallet.h>
+#include <TrustWalletCore/TWPrivateKey.h>
+#include <TrustWalletCore/TWString.h>
+
 #ifndef _Included_io_openfuture_trustwallet_HDWallet
 #define _Included_io_openfuture_trustwallet_HDWallet
 #ifdef __cplusplus
@@ -14,7 +22,12 @@ extern "C" {
  */
 JNIEXPORT jlong JNICALL Java_io_openfuture_trustwallet_HDWallet_nativeCreate
   (JNIEnv *, jclass, jint, jstring){
+    TWHDWallet* walletNew = TWHDWalletCreate(128, TWStringCreateWithUTF8Bytes(""));
+    std::cout << "done." << std::endl;
     std::cout << "Secret mnemonic for new wallet: '";
+    std::cout << TWStringUTF8Bytes(TWHDWalletMnemonic(walletNew)) << "'." << std::endl;
+    TWHDWalletDelete(walletNew);
+    return 1;
   }
 
 /*
