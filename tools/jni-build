@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set -e
+
+cd openplatform
+echo "Building JNI shared library:"`pwd`
+cmake .
+make
+echo "Building JNI shared library: done"
