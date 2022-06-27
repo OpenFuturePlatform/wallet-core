@@ -68,3 +68,9 @@ samples/cpp/sample
 /openplatform/CMakeCache.txt
 /openplatform/cmake_install.cmake
 /openplatform/CMakeFiles/
+
+/open-platform/Makefile
+/open-platform/libtrust-core-jvm.dylib
+/open-platform/CMakeCache.txt
+/open-platform/cmake_install.cmake
+/open-platform/CMakeFiles/
