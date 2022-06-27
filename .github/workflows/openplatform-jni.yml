@@ -9,10 +9,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install LLVM and Clang
-      uses: KyleMayes/install-llvm-action@v1
-      with:
-        version: "11.0"
     - name: Set up Clang
       uses: egor-tensin/setup-clang@v1
       with:
@@ -57,15 +53,6 @@ jobs:
         CC: /usr/bin/clang
         CXX: /usr/bin/clang++
         CK_TIMEOUT_MULTIPLIER: 4
-#    - name: Build and run C++ sample app
-#      run: |
-#        cd samples/cpp
-#        cmake . -DWALLET_CORE=../../ -DCMAKE_BUILD_TYPE=Debug
-#        make
-#        ./sample
-#      env:
-#        CC: /usr/bin/clang
-#        CXX: /usr/bin/clang++
     - name: Build JNI shared library
       run: |
         cd openplatform
