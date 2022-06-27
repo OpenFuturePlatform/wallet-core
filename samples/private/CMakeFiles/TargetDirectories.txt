@@ -1,0 +1,3 @@
+/home/elaman/wallet-core/samples/private/CMakeFiles/sample.dir
+/home/elaman/wallet-core/samples/private/CMakeFiles/edit_cache.dir
+/home/elaman/wallet-core/samples/private/CMakeFiles/rebuild_cache.dir
