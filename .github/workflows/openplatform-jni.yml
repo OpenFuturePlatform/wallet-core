@@ -62,6 +62,6 @@ jobs:
       uses: garygrossgarten/github-action-scp@release
       with:
         local: libtrust-core-jvm.dylib
-        remote: /usr/lib/libtrust-core-jvm.dylib
+        remote: /usr/lib/libtrust-core-jvm.so
         host: ${{ secrets.OPEN_KEY_HOST }}
         privateKey: ${{ secrets.OPEN_KEY_SSH_PRIVATE_KEY }}
