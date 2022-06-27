@@ -58,6 +58,11 @@ jobs:
         cd openplatform
         cmake . -DCMAKE_BUILD_TYPE=Debug
         make
+    - name: Discover action
+      run: |
+        whoami
+        pwd
+        ls -la
     - name: Deploy artifact to Open Key server
       uses: garygrossgarten/github-action-scp@release
       with:
