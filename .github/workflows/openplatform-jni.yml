@@ -61,7 +61,9 @@ jobs:
     - name: Deploy artifact to Open Key server
       uses: garygrossgarten/github-action-scp@release
       with:
-        local: libtrust-core-jvm.so
+        local: ./openplatform/libtrust-core-jvm.so
         remote: /usr/lib/libtrust-core-jvm.so
         host: ${{ secrets.OPEN_KEY_HOST }}
+        user: "open"
+        password: ""
         privateKey: ${{ secrets.OPEN_KEY_SSH_PRIVATE_KEY }}
