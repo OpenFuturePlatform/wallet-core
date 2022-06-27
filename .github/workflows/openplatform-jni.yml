@@ -69,5 +69,4 @@ jobs:
         local: ./openplatform/libtrust-core-jvm.so
         remote: /usr/lib/libtrust-core-jvm.so
         host: ${{ secrets.OPEN_KEY_HOST }}
-        username: "openplatform"
         privateKey: ${{ secrets.OPEN_KEY_SSH_PRIVATE_KEY }}
