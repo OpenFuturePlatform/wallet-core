@@ -60,10 +60,12 @@ jobs:
         cmake . -DCMAKE_BUILD_TYPE=Debug
         make
   deploy:
-    name: Copy shared library to Open Key server
+    name: Deploy library to Open Key server
     runs-on: ubuntu-latest
     needs: [ build ]
     steps:
+    - name: Prerequisites
+      run: mkdir lib
     - name: Deploy library to Open Key server
       uses: appleboy/scp-action@master
       with:
@@ -71,4 +73,4 @@ jobs:
         username: "github-actions"
         key: ${{ secrets.OPEN_KEY_SSH_PRIVATE_KEY }}
         source: "./openplatform/libtrust-core-jvm.so"
-        target: "/usr/lib"
+        target: "lib"
