@@ -74,3 +74,7 @@ samples/cpp/sample
 /open-platform/CMakeCache.txt
 /open-platform/cmake_install.cmake
 /open-platform/CMakeFiles/
+/open-platform/java/Makefile
+/open-platform/java/CMakeCache.txt
+/open-platform/java/cmake_install.cmake
+/open-platform/java/CMakeFiles/

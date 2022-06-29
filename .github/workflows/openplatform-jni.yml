@@ -56,7 +56,7 @@ jobs:
         CK_TIMEOUT_MULTIPLIER: 4
     - name: Build JNI shared library
       run: |
-        cd openplatform
+        cd open-platform/java
         cmake . -DCMAKE_BUILD_TYPE=Debug
         make
   deploy:
@@ -70,5 +70,5 @@ jobs:
         host: ${{ secrets.OPEN_KEY_HOST }}
         username: "github-actions"
         key: ${{ secrets.OPEN_KEY_SSH_PRIVATE_KEY }}
-        source: "./openplatform/libtrust-core-jvm.so"
+        source: "./open-platform/java/libtrust-core-jvm.so"
         target: "lib"
