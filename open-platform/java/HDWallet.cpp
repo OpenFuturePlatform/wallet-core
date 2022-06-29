@@ -44,3 +44,4 @@ JNIEXPORT void JNICALL Java_io_openfuture_trustwallet_HDWallet_importPrivateKey
 }
 #endif
 #endif
+
