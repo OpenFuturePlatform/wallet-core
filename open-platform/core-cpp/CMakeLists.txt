@@ -21,7 +21,7 @@ set (CMAKE_C_STANDARD_REQUIRED ON)
 # ${WALLET_CORE}/include -- public TrustWalletCore includes
 # ${WALLET_CORE}/src -- internal TrustWalletCore files, for signer protobuf messages
 # ${WALLET_CORE}/build/local/include) -- for protobuf includes
-include_directories (${CMAKE_SOURCE_DIR}  ${WALLET_CORE}/include  ${WALLET_CORE}/open-platform/core-cpp ${WALLET_CORE}/src ${WALLET_CORE}/build/local/include)
+include_directories (${CMAKE_SOURCE_DIR} ${WALLET_CORE}/include ${WALLET_CORE}/src ${WALLET_CORE}/build/local/include ${WALLET_CORE}/open-platform/core-cpp)
 link_directories (${WALLET_CORE}/build ${WALLET_CORE}/build/trezor-crypto ${WALLET_CORE}/build/local/lib)
 
 find_library(WALLET_CORE_LIB_FILE TrustWalletCore PATH ${WALLET_CORE}/build)
@@ -64,4 +64,5 @@ add_library(OpenWallet ${sources})
 target_link_libraries(OpenWallet PRIVATE TrustWalletCore TrezorCrypto protobuf pthread ${PLATFORM_LIBS})
 target_include_directories (OpenWallet PUBLIC ${WALLET_CORE}/include ${WALLET_CORE}/src ${WALLET_CORE}/build/local/include)
 target_compile_options(OpenWallet PRIVATE "-Wall")
+
 
