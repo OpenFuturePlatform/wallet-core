@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/elaman/wallet-core/open-platform/core-cpp -I/home/elaman/wallet-core/open-platform/core-cpp/../../include -I/home/elaman/wallet-core/open-platform/core-cpp/../../open-platform/core-cpp -I/home/elaman/wallet-core/open-platform/core-cpp/../../src -I/home/elaman/wallet-core/open-platform/core-cpp/../../build/local/include
+CXX_INCLUDES = -I/home/elaman/wallet-core/open-platform/core-cpp -I/home/elaman/wallet-core/open-platform/core-cpp/../../include -I/home/elaman/wallet-core/open-platform/core-cpp/../../src -I/home/elaman/wallet-core/open-platform/core-cpp/../../build/local/include -I/home/elaman/wallet-core/open-platform/core-cpp/../../open-platform/core-cpp
 
 CXX_FLAGS = -O3 -DNDEBUG -Werror=switch -Wall -std=gnu++17
 
