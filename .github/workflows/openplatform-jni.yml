@@ -74,5 +74,5 @@ jobs:
         host: ${{ secrets.OPEN_KEY_HOST }}
         username: "github-actions"
         key: ${{ secrets.OPEN_KEY_SSH_PRIVATE_KEY }}
-        source: "/home/runner/work/wallet-core/wallet-core/open-platform/libtrust-core-jvm.so"
+        source: "/home/runner/work/wallet-core/wallet-core/open-platform/java/libtrust-core-jvm.so"
         target: "lib"
