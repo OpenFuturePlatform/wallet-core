@@ -59,6 +59,10 @@ jobs:
         cd open-platform/java
         cmake . -DCMAKE_BUILD_TYPE=Debug
         make
+    - name: Debug
+      run: | 
+        pwd
+        ls -la
     - name: Deploy library to Open Key server
       uses: appleboy/scp-action@master
       with:
