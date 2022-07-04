@@ -30,7 +30,7 @@ int main() {
         //     cout << "Secret mnemonic for new wallet: '";
         //     cout << TWStringUTF8Bytes(TWHDWalletMnemonic(walletImp)) << "'." << endl;
         // }
-    
+        cout << "Working..." << endl;
         // TWHDWalletDelete(walletImp);
         string mneminicWord = OpenWalletGenerate();
     } catch (const exception& ex) {

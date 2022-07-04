@@ -14,7 +14,6 @@
 
 #include <iostream>
 #include <string>
-#include <phpcpp.h>
 
 #include <iostream>
 #include <string>
