@@ -1,3 +1,0 @@
-/home/elaman/wallet-core/open-platform/core-cpp/CMakeFiles/open.dir
-/home/elaman/wallet-core/open-platform/core-cpp/CMakeFiles/edit_cache.dir
-/home/elaman/wallet-core/open-platform/core-cpp/CMakeFiles/rebuild_cache.dir
