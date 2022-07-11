@@ -5,10 +5,10 @@
 #include <TrustWalletCore/TWPrivateKey.h>
 #include <TrustWalletCore/TWString.h>
 
+#include "Base64.h"
 #include <Coin.h>
 #include <Data.h>
 #include <HDWallet.h>
-#include "Base64.h"
 #include <HexCoding.h>
 #include <PrivateKey.h>
 
@@ -38,7 +38,7 @@ string OpenWalletGenerate() {
 }
 
 string OpenImportPrivateKey(string privateKey, int coin) {
-    const TWCoinType coinType = TWCoinType::TWCoinTypeEthereum; // TWCoinTypeBitcoin, TWCoinTypeEthereum
+    const TWCoinType coinType = TWCoinType::TWCoinTypeEthereum; // TWCoinTypeBitcoin
     cout << "Working with coin: " << TWStringUTF8Bytes(TWCoinTypeConfigurationGetName(coinType))
          << " " << TWStringUTF8Bytes(TWCoinTypeConfigurationGetSymbol(coinType)) << endl;
 
@@ -50,12 +50,13 @@ string OpenImportPrivateKey(string privateKey, int coin) {
     return address;
 }
 
-string OpenSignTransaction(string privateKey, string address, string chainId, long gasPrice, long gasLimit, long amount) {
+string OpenSignTransaction(string privateKey, string address, string chainId, long gasPrice,
+                           long gasLimit, long amount) {
 
-    string chainIdB64  = Base64::encode(parse_hex("01"));
+    string chainIdB64 = Base64::encode(parse_hex("01"));
     string gasPriceB64 = Base64::encode(store(uint256_t((gasPrice))));
     string gasLimitB64 = Base64::encode(store(uint256_t(gasLimit)));
-    string amountB64   = Base64::encode(store(uint256_t(amount)));
+    string amountB64 = Base64::encode(store(uint256_t(amount)));
 
     string transaction = "{"
                          "\"chainId\":\"" +
@@ -63,17 +64,19 @@ string OpenSignTransaction(string privateKey, string address, string chainId, lo
                          gasLimitB64 + "\",\"toAddress\":\"" + address +
                          "\",\"transaction\":{\"transfer\":{\"amount\":\"" + amountB64 + "\"}}}";
 
-    cout << "transaction: " << transaction << endl;                     
+    cout << "transaction: " << transaction << endl;
 
+    // Get vector byte from hex private key string
     Data privKeyData = parse_hex(privateKey);
+    // Convert vector byte data to TWData object
     TWData* data = TWDataCreateWithBytes(privKeyData.data(), privKeyData.size());
+    // Get TWPrivateKey object from TWData
     TWPrivateKey* privateKeyImported = TWPrivateKeyCreateWithData(data);
-    auto secretPrivKey = TWPrivateKeyData(privateKeyImported);
+    TWData* secretPrivKey = TWPrivateKeyData(privateKeyImported);
 
-    auto json = TWStringCreateWithUTF8Bytes(transaction.c_str());
-    auto result = TWAnySignerSignJSON(json, secretPrivKey, TWCoinTypeEthereum);
+    TWString* json = TWStringCreateWithUTF8Bytes(transaction.c_str());
+    TWString* result = TWAnySignerSignJSON(json, secretPrivKey, TWCoinTypeEthereum);
     auto signedTransaction = string(TWStringUTF8Bytes(result));
 
     return signedTransaction;
-
 }

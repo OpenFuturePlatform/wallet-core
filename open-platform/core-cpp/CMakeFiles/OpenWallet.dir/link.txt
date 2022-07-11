@@ -1,2 +1,0 @@
-/usr/bin/ar qc libOpenWallet.a CMakeFiles/OpenWallet.dir/CMakeFiles/3.23.1/CompilerIdCXX/CMakeCXXCompilerId.cpp.o CMakeFiles/OpenWallet.dir/open.cpp.o
-/usr/bin/ranlib libOpenWallet.a

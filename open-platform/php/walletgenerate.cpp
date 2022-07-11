@@ -1,19 +1,4 @@
-// #include "../../include/TrustWalletCore/TWCoinType.h"
-// #include "../../include/TrustWalletCore/TWAnySigner.h"
-// #include "../../include/TrustWalletCore/TWCoinTypeConfiguration.h"
-// #include "../../include/TrustWalletCore/TWHDWallet.h"
-// #include "../../include/TrustWalletCore/TWPrivateKey.h"
-// #include "../../include/TrustWalletCore/TWString.h"
-//#include "../../src/interface/TWString.cpp"
-
-// #include <TrustWalletCore/TWCoinType.h>
-// #include <TrustWalletCore/TWAnySigner.h>
-// #include <TrustWalletCore/TWCoinTypeConfiguration.h>
-// #include <TrustWalletCore/TWHDWallet.h>
-// #include <TrustWalletCore/TWPrivateKey.h>
-// #include <TrustWalletCore/TWString.h>
-
-#include "../abstract/open.cpp"
+#include "open.h"
 
 
 #include <iostream>
