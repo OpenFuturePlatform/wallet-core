@@ -17,6 +17,12 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set (CMAKE_C_STANDARD 11)
 set (CMAKE_C_STANDARD_REQUIRED ON)
 
+find_package(Boost REQUIRED)
+
+# Include dirs:
+# ${WALLET_CORE}/include -- public TrustWalletCore includes
+# ${WALLET_CORE}/src -- internal TrustWalletCore files, for signer protobuf messages
+# ${WALLET_CORE}/build/local/include) -- for protobuf includes
 include_directories (${CMAKE_SOURCE_DIR} ${WALLET_CORE}/include ${WALLET_CORE}/src ${WALLET_CORE}/build/local/include ${WALLET_CORE}/open-platform/core-cpp)
 link_directories (${WALLET_CORE}/build ${WALLET_CORE}/build/trezor-crypto ${WALLET_CORE}/build/local/lib)
 
@@ -57,8 +63,5 @@ SET (CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${PLATFORM_LINK_FLAGS}")
 
 file(GLOB_RECURSE sources "*.cpp" "*.h")
 add_library(OpenWallet ${sources})
-#target_link_libraries(OpenWallet PRIVATE TrustWalletCore TrezorCrypto protobuf pthread ${PLATFORM_LIBS})
-#target_include_directories (OpenWallet PUBLIC ${WALLET_CORE}/include ${WALLET_CORE}/src ${WALLET_CORE}/build/local/include)
+target_link_libraries(OpenWallet PRIVATE TrustWalletCore TrezorCrypto protobuf pthread ${PLATFORM_LIBS} Boost::boost)
 target_compile_options(OpenWallet PRIVATE "-Wall")
-
-

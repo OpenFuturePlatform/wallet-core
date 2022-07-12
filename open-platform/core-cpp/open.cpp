@@ -78,5 +78,7 @@ string OpenSignTransaction(string privateKey, string address, string chainId, lo
     TWString* result = TWAnySignerSignJSON(json, secretPrivKey, TWCoinTypeEthereum);
     auto signedTransaction = string(TWStringUTF8Bytes(result));
 
+    cout << "Signed transaction data (to be broadcast to network):  (len "
+         << signedTransaction.length() << ") '" << signedTransaction << "'" << endl;
     return signedTransaction;
 }

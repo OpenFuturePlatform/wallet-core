@@ -8,10 +8,12 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set (CMAKE_C_STANDARD 13)
 set (CMAKE_C_STANDARD_REQUIRED ON)
 
-include_directories (${CMAKE_SOURCE_DIR} ${WALLET_CORE}/include ${WALLET_CORE}/src ${WALLET_CORE}/build/local/include)
-link_directories (${WALLET_CORE}/build ${WALLET_CORE}/build/trezor-crypto ${WALLET_CORE}/build/local/lib)
+include_directories (${CMAKE_SOURCE_DIR} ${WALLET_CORE}/include ${WALLET_CORE}/src ${WALLET_CORE}/build/local/include ${WALLET_CORE}/open-platform/core-cpp)
+link_directories (${WALLET_CORE}/build ${WALLET_CORE}/build/trezor-crypto ${WALLET_CORE}/build/local/lib ${WALLET_CORE}/open-platform/core-cpp)
 
 find_library(WALLET_CORE_LIB_FILE TrustWalletCore PATH ${WALLET_CORE}/build)
+find_library(WALLET_OPEN_CORE_LIB_FILE OpenWallet PATH ${WALLET_CORE}/open-platform/core-cpp)
+
 if (NOT WALLET_CORE_LIB_FILE)
     message (FATAL_ERROR "TrustWalletCore library not found.  ${SETUP_MESSAGE}")
 else ()
@@ -50,4 +52,4 @@ include_directories(${JNI_INCLUDE_DIRS})
 set(SOURCE_FILES HDWallet.cpp)
 add_library(trust-core-jvm SHARED ${SOURCE_FILES})
 
-target_link_libraries (trust-core-jvm TrustWalletCore TrezorCrypto protobuf pthread ${PLATFORM_LIBS})
+target_link_libraries (trust-core-jvm OpenWallet TrustWalletCore TrezorCrypto protobuf pthread ${PLATFORM_LIBS})
