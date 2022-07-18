@@ -1,5 +1,6 @@
 cmake_minimum_required (VERSION 3.8 FATAL_ERROR)
 project (wallet-core-open-cpp-test)
+set(WALLET_CORE "../../")
 
 if (NOT ("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang"))
     message(FATAL_ERROR "You should use clang compiler")

@@ -77,3 +77,13 @@ samples/cpp/sample
 /open-platform/java/CMakeCache.txt
 /open-platform/java/cmake_install.cmake
 /open-platform/java/CMakeFiles/
+/open-platform/core-cpp/Makefile
+/open-platform/core-cpp/libOpenWallet.a
+/open-platform/core-cpp/CMakeCache.txt
+/open-platform/core-cpp/cmake_install.cmake
+/open-platform/core-cpp/CMakeFiles/
+/open-platform/java/CMakeFiles/
+/open-platform/java/CMakeCache.txt
+/open-platform/java/cmake_install.cmake
+/open-platform/java/libtrust-core-jvm.dylib
+/open-platform/java/Makefile

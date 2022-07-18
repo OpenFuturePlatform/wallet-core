@@ -37,8 +37,8 @@ string OpenWalletGenerate() {
     return mnemonicWORD;
 }
 
-string OpenImportPrivateKey(string privateKey, int coin) {
-    const TWCoinType coinType = TWCoinType::TWCoinTypeEthereum; // TWCoinTypeBitcoin
+string OpenImportPrivateKey(string privateKey, int coinType) {
+    const TWCoinType coinType = TWCoinType::TWCoinTypeEthereum;
     cout << "Working with coin: " << TWStringUTF8Bytes(TWCoinTypeConfigurationGetName(coinType))
          << " " << TWStringUTF8Bytes(TWCoinTypeConfigurationGetSymbol(coinType)) << endl;
 
