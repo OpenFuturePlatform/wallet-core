@@ -1,70 +1,33 @@
-# Expected input configuration: WALLET_CORE: directory for TrustWalletCore build dir
-# e.g. cmake . -DWALLET_CORE=../wallet-core
-cmake_minimum_required (VERSION 3.8 FATAL_ERROR)
-project (wallet-core-php-cpp)
+cmake_minimum_required(VERSION 3.8 FATAL_ERROR)
+project(open-php-cpp VERSION 1.0.0 DESCRIPTION "Open PHP library")
 
 message(STATUS "Begin cmaking of PHP extension ...")
 
-if (NOT ("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang"))
-    message(FATAL_ERROR "You should use clang compiler")
+if(NOT("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang"))
+	message(FATAL_ERROR "You should use clang compiler")
 endif()
-
-set (SETUP_MESSAGE "Please provide TrustWalletCore build directory with -DWALLET_CORE.   Example: cmake . -DWALLET_CORE=../wallet-core")
-
-if (NOT WALLET_CORE)
-    message (FATAL_ERROR "${SETUP_MESSAGE}")
-endif ()
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-set (CMAKE_C_STANDARD 11)
-set (CMAKE_C_STANDARD_REQUIRED ON)
+set(CMAKE_C_STANDARD 11)
+set(CMAKE_C_STANDARD_REQUIRED ON)
 
-# Include dirs:
-# ${WALLET_CORE}/include -- public TrustWalletCore includes
-# ${WALLET_CORE}/src -- internal TrustWalletCore files, for signer protobuf messages
-# ${WALLET_CORE}/build/local/include) -- for protobuf includes
-include_directories (${CMAKE_SOURCE_DIR} ${WALLET_CORE}/include ${WALLET_CORE}/src ${WALLET_CORE}/build/local/include)
-link_directories (${WALLET_CORE}/build ${WALLET_CORE}/build/trezor-crypto ${WALLET_CORE}/build/local/lib)
+set(WALLET_CORE ../../)
+set(PHP_CPP usr/include/)
+set(PHP_PATH /usr/include/php/20190902)
+set(PHP_LIBS "php")
+set(PHP_LIB_PATH "")
 
-find_library(WALLET_CORE_LIB_FILE TrustWalletCore PATH ${WALLET_CORE}/build)
-if (NOT WALLET_CORE_LIB_FILE)
-    message (FATAL_ERROR "TrustWalletCore library not found.  ${SETUP_MESSAGE}")
-else ()
-    message ("TrustWalletCore library found here: ${WALLET_CORE_LIB_FILE}")
-endif ()
+include_directories(${CMAKE_SOURCE_DIR} ${WALLET_CORE}/open-platform/core-cpp ${WALLET_CORE}/open-platform/php/zend  ${PHP_PATH}/ ${PHP_PATH}/main ${PHP_PATH}/Zend ${PHP_PATH}/TSRM)
+link_directories(${WALLET_CORE}/open-platform/core-cpp ${WALLET_CORE}/build ${WALLET_CORE}/build/trezor-crypto)
 
-# Create all libraries and executables in the root binary dir
-set (CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
+find_library(WALLET_OPEN_CORE_LIB_FILE OpenWallet PATH ${WALLET_CORE}/open-platform/core-cpp)
 
-if (NOT CMAKE_BUILD_TYPE)
-	set (CMAKE_BUILD_TYPE "Release" CACHE STRING "Choose the type of build, options are: Debug Release RelWithDebInfo MinSizeRel." FORCE)
-endif ()
-
-if (WIN32)
-	add_definitions (-D_WIN32_WINNT=0x0600
-					-D_CRT_SECURE_NO_WARNINGS
-					-DWINVER=0x0600
-					-DWIN32_LEAN_AND_MEAN)
-else ()
-	add_compile_options (-Werror=switch)
-endif ()
-
-if (WIN32)
-	add_definitions(/bigobj)
-endif ()
-
-if (APPLE)
-	set (PLATFORM_LINK_FLAGS "-framework Foundation -framework OpenCL")
-elseif (WIN32)
-	set (PLATFORM_LINK_FLAGS "/STACK:8000000") #provides 8MB default stack size for linux on windows
-endif ()
-
-SET (CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${PLATFORM_LINK_FLAGS}")
+# add_library(walletgenerate SHARED walletgenerate.cpp)
 
 # sources of this exec
-add_executable (walletgenerate.so walletgenerate.cpp)
+add_executable(walletgenerate walletgenerate.cpp)
 
 # link with our library, and default platform libraries
-target_link_libraries (walletgenerate.so TrustWalletCore TrezorCrypto protobuf pthread ${PLATFORM_LIBS})
+target_link_libraries(walletgenerate phpcpp OpenWallet)

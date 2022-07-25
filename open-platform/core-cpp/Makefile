@@ -177,30 +177,6 @@ open.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/OpenWallet.dir/build.make CMakeFiles/OpenWallet.dir/open.cpp.s
 .PHONY : open.cpp.s
 
-test/OpenTests.o: test/OpenTests.cpp.o
-.PHONY : test/OpenTests.o
-
-# target to build an object file
-test/OpenTests.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/OpenWallet.dir/build.make CMakeFiles/OpenWallet.dir/test/OpenTests.cpp.o
-.PHONY : test/OpenTests.cpp.o
-
-test/OpenTests.i: test/OpenTests.cpp.i
-.PHONY : test/OpenTests.i
-
-# target to preprocess a source file
-test/OpenTests.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/OpenWallet.dir/build.make CMakeFiles/OpenWallet.dir/test/OpenTests.cpp.i
-.PHONY : test/OpenTests.cpp.i
-
-test/OpenTests.s: test/OpenTests.cpp.s
-.PHONY : test/OpenTests.s
-
-# target to generate assembly for a file
-test/OpenTests.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/OpenWallet.dir/build.make CMakeFiles/OpenWallet.dir/test/OpenTests.cpp.s
-.PHONY : test/OpenTests.cpp.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -216,9 +192,6 @@ help:
 	@echo "... open.o"
 	@echo "... open.i"
 	@echo "... open.s"
-	@echo "... test/OpenTests.o"
-	@echo "... test/OpenTests.i"
-	@echo "... test/OpenTests.s"
 .PHONY : help
 
 
