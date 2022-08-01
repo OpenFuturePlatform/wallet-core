@@ -180,24 +180,24 @@ CMakeFiles/test.dir/test.cpp.o: test.cpp \
   /usr/include/c++/9/bits/ostream.tcc \
   /usr/include/c++/9/istream \
   /usr/include/c++/9/bits/istream.tcc \
-  /usr/include/c++/9/array \
-  /usr/include/c++/9/utility \
-  /usr/include/c++/9/bits/stl_relops.h \
   /usr/include/c++/9/vector \
   /usr/include/c++/9/bits/stl_construct.h \
   /usr/include/c++/9/bits/stl_uninitialized.h \
+  /usr/include/c++/9/utility \
+  /usr/include/c++/9/bits/stl_relops.h \
   /usr/include/c++/9/bits/stl_vector.h \
   /usr/include/c++/9/bits/stl_bvector.h \
-  /usr/include/c++/9/bits/vector.tcc
+  /usr/include/c++/9/bits/vector.tcc \
+  /usr/include/c++/9/array
 
+
+/usr/include/c++/9/array:
 
 /usr/include/c++/9/bits/stl_vector.h:
 
-/usr/include/c++/9/vector:
-
 /usr/include/c++/9/bits/stl_relops.h:
 
-/usr/include/c++/9/array:
+/usr/include/c++/9/vector:
 
 /usr/include/c++/9/istream:
 

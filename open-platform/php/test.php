@@ -1,0 +1,11 @@
+<?php
+
+$result = wallet_generate();
+
+echo "Address: ". $result[0]  . "\n";
+echo "Private Key: ". $result[1]  . "\n";
+
+echo "\nImport address from Private Key\n";
+$prvKey = "0x15e9df2c39a3d2b12f9e72e23cabeaccd2cd25255a816f4d0b30e39188e3ece4";
+$address = wallet_import($result[1], 1);
+echo $address . "\n";

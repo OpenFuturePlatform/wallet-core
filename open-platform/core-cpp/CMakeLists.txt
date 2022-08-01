@@ -32,7 +32,8 @@ else ()
 endif ()
 
 file(GLOB_RECURSE sources "*.cpp" "*.h")
-add_library(OpenWallet ${sources})
+add_library(OpenWallet SHARED ${sources})
 
-target_link_libraries(OpenWallet PRIVATE TrustWalletCore)
+target_include_directories(OpenWallet PRIVATE ${WALLET_CORE}/include ${WALLET_CORE}/src ${WALLET_CORE}/build/local/include ${WALLET_CORE}/trezor-crypto/include)
+target_link_libraries(OpenWallet PUBLIC TrustWalletCore TrezorCrypto protobuf pthread ${PLATFORM_LIBS})
 target_compile_options(OpenWallet PRIVATE "-Wall")
