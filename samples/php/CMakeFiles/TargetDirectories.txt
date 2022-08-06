@@ -1,3 +1,0 @@
-/home/elaman/wallet-core/samples/php/CMakeFiles/walletgenerate.so.dir
-/home/elaman/wallet-core/samples/php/CMakeFiles/edit_cache.dir
-/home/elaman/wallet-core/samples/php/CMakeFiles/rebuild_cache.dir
