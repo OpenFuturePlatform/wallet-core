@@ -87,3 +87,8 @@ samples/cpp/sample
 /open-platform/java/cmake_install.cmake
 /open-platform/java/libtrust-core-jvm.dylib
 /open-platform/java/Makefile
+/open-platform/example/cmake_install.cmake
+/open-platform/example/CMakeCache.txt
+/open-platform/example/Makefile
+/open-platform/example/test
+/open-platform/example/CMakeFiles/

@@ -23,7 +23,7 @@ extern "C" {
  * Signature: ()Ljava/lang/String;
  */
 JNIEXPORT jstring JNICALL Java_io_openfuture_wallet_jni_TrustWallet_generateHDWallet
-  (JNIEnv *env, jclass thisObject){
+  (JNIEnv *env, jclass thisObject) {
     try {
         string mnemonicWord = OpenWalletGenerate();
         return env->NewStringUTF(mnemonicWord.c_str());
@@ -39,12 +39,12 @@ JNIEXPORT jstring JNICALL Java_io_openfuture_wallet_jni_TrustWallet_generateHDWa
  * Signature: (Ljava/lang/String;I)Ljava/lang/String;
  */
 JNIEXPORT jstring JNICALL Java_io_openfuture_wallet_jni_TrustWallet_importPrivateKey
-  (JNIEnv *env, jclass thisObject, jstring jPrivateKey, jint coinType){
+  (JNIEnv *env, jclass thisObject, jstring jPrivateKey, jint coinType) {
     try {
         jboolean isCopy;
         const char *convertedValue = (env)->GetStringUTFChars(jPrivateKey, &isCopy);
         std::string privateKey = convertedValue;
-        string address = OpenImportPrivateKey(privateKey, 1);
+        string address = OpenImportPrivateKey(privateKey, coinType);
         return env->NewStringUTF(address.c_str());
     } catch (const std::exception& ex) {
         std::cout << "EXCEPTION: " << ex.what() << std::endl;
@@ -58,7 +58,7 @@ JNIEXPORT jstring JNICALL Java_io_openfuture_wallet_jni_TrustWallet_importPrivat
  * Signature: (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;JJJ)Ljava/lang/String;
  */
 JNIEXPORT jstring JNICALL Java_io_openfuture_wallet_jni_TrustWallet_signTransaction
-  (JNIEnv *env, jclass thisObject, jstring jPrivateKey, jstring jAddress, jstring jChainId, jlong jGasPrice, jlong jGasLimit, jlong jAmount){
+  (JNIEnv *env, jclass thisObject, jstring jPrivateKey, jstring jAddress, jstring jChainId, jlong jGasPrice, jlong jGasLimit, jlong jAmount) {
     try {
         jboolean isCopy;
         const char *convertedPrivateKey = (env)->GetStringUTFChars(jPrivateKey, &isCopy);
@@ -75,6 +75,55 @@ JNIEXPORT jstring JNICALL Java_io_openfuture_wallet_jni_TrustWallet_signTransact
         throw ex;
     }
 }
+
+/*
+ * Class:     io_openfuture_wallet_jni_TrustWallet
+ * Method:    generateAddress
+ * Signature: (Ljava/lang/String;I)Ljava/lang/String;
+ */
+JNIEXPORT jstring JNICALL Java_io_openfuture_wallet_jni_TrustWallet_generateAddress
+  (JNIEnv *, jclass, jstring seedCode, jint coinType) {
+    try {
+        jboolean isCopy;
+        const char *convertedSeedCode = (env)->GetStringUTFChars(jSeedCode, &isCopy);
+        std::string seedCode = convertedSeedCode;
+        auto secretMnemonic = TWStringCreateWithUTF8Bytes(seedCode);
+        walletImp = TWHDWalletCreateWithMnemonic(secretMnemonic, TWStringCreateWithUTF8Bytes(""));
+        TWStringDelete(secretMnemonic);
+        TWPrivateKey* secretPrivateKeyDefault = TWHDWalletGetKeyForCoin(walletImp, coinType);
+        
+        
+        return env->NewStringUTF(address.c_str());
+    } catch (const std::exception& ex) {
+        std::cout << "EXCEPTION: " << ex.what() << std::endl;
+        throw ex;
+    }
+}
+
+/*
+ * Class:     io_openfuture_wallet_jni_TrustWallet
+ * Method:    generatePrivateKey
+ * Signature: (Ljava/lang/String;I)Ljava/lang/String;
+ */
+JNIEXPORT jstring JNICALL Java_io_openfuture_wallet_jni_TrustWallet_generatePrivateKey
+  (JNIEnv *, jclass, jstring jSeedCode, jint coinType) {
+    try {
+        jboolean isCopy;
+        const char *convertedSeedCode = (env)->GetStringUTFChars(jSeedCode, &isCopy);
+        std::string seedCode = convertedSeedCode;
+        auto secretMnemonic = TWStringCreateWithUTF8Bytes(seedCode);
+        walletImp = TWHDWalletCreateWithMnemonic(secretMnemonic, TWStringCreateWithUTF8Bytes(""));
+        TWStringDelete(secretMnemonic);
+        TWPrivateKey* secretPrivateKeyDefault = TWHDWalletGetKeyForCoin(walletImp, coinType);
+        
+        
+        return env->NewStringUTF(address.c_str());
+    } catch (const std::exception& ex) {
+        std::cout << "EXCEPTION: " << ex.what() << std::endl;
+        throw ex;
+    }
+}
+
 
 #ifdef __cplusplus
 }
