@@ -93,7 +93,7 @@ string OpenSignTransaction(string privateKey, string address, string chainId, lo
 }
 
 string OpenEncodeBase32(string rawString, string password) {
-    cout << "String to encode: '" << rawString << "'" << endl;
+    cout << "String to encodee: '" << rawString << "'" << endl;
     Data decoded = parse_hex(rawString);
     string encoded = Base32::encode(decoded, password.c_str());
     cout << "Encoded: '" << encoded << "'" << endl;

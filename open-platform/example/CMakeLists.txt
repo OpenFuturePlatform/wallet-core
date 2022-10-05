@@ -1,21 +1,20 @@
 cmake_minimum_required (VERSION 3.8 FATAL_ERROR)
 project (wallet-core-open-cpp)
 
+set(WALLET_CORE "../../")
+
 if (NOT ("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang"))
     message(FATAL_ERROR "You should use clang compiler")
 endif()
 
-set (SETUP_MESSAGE "Please provide TrustWalletCore build directory with -DWALLET_CORE.   Example: cmake . -DWALLET_CORE=../wallet-core")
-
-if (NOT WALLET_CORE)
-    message (FATAL_ERROR "${SETUP_MESSAGE}")
-endif ()
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set (CMAKE_C_STANDARD 11)
 set (CMAKE_C_STANDARD_REQUIRED ON)
+
+set(WALLET_CORE "../../")
 
 include_directories (${CMAKE_SOURCE_DIR}  ${WALLET_CORE}/open-platform/core-cpp )
 link_directories (${WALLET_CORE}/open-platform/core-cpp)

@@ -5,17 +5,19 @@ if (NOT ("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang"))
     message(FATAL_ERROR "You should use clang compiler")
 endif()
 
-set (SETUP_MESSAGE "Please provide TrustWalletCore build directory with -DWALLET_CORE.   Example: cmake . -DWALLET_CORE=../wallet-core")
-
-if (NOT WALLET_CORE)
-    message (FATAL_ERROR "${SETUP_MESSAGE}")
-endif ()
+#set (SETUP_MESSAGE "Please provide TrustWalletCore build directory with -DWALLET_CORE.   Example: cmake . -DWALLET_CORE=../wallet-core")
+#
+#if (NOT WALLET_CORE)
+#    message (FATAL_ERROR "${SETUP_MESSAGE}")
+#endif ()
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set (CMAKE_C_STANDARD 11)
 set (CMAKE_C_STANDARD_REQUIRED ON)
+
+set (WALLET_CORE "../../")
 
 find_package(Boost REQUIRED)
 
@@ -35,5 +37,5 @@ file(GLOB_RECURSE sources "*.cpp" "*.h")
 add_library(OpenWallet SHARED ${sources})
 
 target_include_directories(OpenWallet PRIVATE ${WALLET_CORE}/include ${WALLET_CORE}/src ${WALLET_CORE}/build/local/include ${WALLET_CORE}/trezor-crypto/include)
-target_link_libraries(OpenWallet PUBLIC TrustWalletCore TrezorCrypto protobuf pthread ${PLATFORM_LIBS})
+target_link_libraries(OpenWallet PUBLIC TrustWalletCore TrezorCrypto protobuf pthread ${PLATFORM_LIBS} Boost::boost)
 target_compile_options(OpenWallet PRIVATE "-Wall")

@@ -11,7 +11,7 @@
 #include "Aeternity/Address.h"
 #include <gtest/gtest.h>
 #include "uint256.h"
-
+A
 using namespace TW;
 using namespace TW::Aeternity;
 
