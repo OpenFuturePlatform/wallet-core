@@ -31,9 +31,12 @@ int main() {
         //cout << "Sign Token    : " << signatureToken << endl;
 
         //std::cout << "'" << signature << "'" << std::endl;
-        //string encodedStr = OpenEncodeBase32(privateKey, "123456");
-        //string decodedStr = OpenDecodeBase32(encodedStr, "123456");
-        
+
+        string encrypted = OpenAesEncryptCtr("ace5e6e1b60a3f8c37445377d97b3ba30d99e8de012af9c305d78e40db3dda73", "password");
+        cout << "En: " << encrypted << endl;
+        string decrypted = OpenAesDecryptCtr(encrypted, "password");
+        cout << decrypted << endl;
+
     } catch (const std::exception& ex) {
         std::cout << "EXCEPTION: " << ex.what() << std::endl;
         throw ex;

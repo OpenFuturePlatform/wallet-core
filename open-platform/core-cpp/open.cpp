@@ -4,6 +4,8 @@
 #include <TrustWalletCore/TWHDWallet.h>
 #include <TrustWalletCore/TWPrivateKey.h>
 #include <TrustWalletCore/TWString.h>
+#include <TrustWalletCore/TWAES.h>
+#include <TrustWalletCore/TWPBKDF2.h>
 
 #include "Base32.h"
 #include "Base64.h"
@@ -145,4 +147,49 @@ string OpenDecodeBase32(string encodedString, string password) {
     string decoded_hex = hex(decoded);
     cout << "Decoded: '" << decoded_hex << "'" << endl;
     return decoded_hex;
+}
+
+string OpenAesEncryptCtr(string data, string password) {
+    TWData* hexedPassword = TWDataCreateWithHexString(TWStringCreateWithUTF8Bytes(password.c_str()));
+    TWData* salt = TWDataCreateWithHexString(TWStringCreateWithUTF8Bytes("NaCl"));
+    TWData* iv = TWDataCreateWithHexString(TWStringCreateWithUTF8Bytes("4949494949494949"));
+
+    TWData* key = TWPBKDF2HmacSha256(hexedPassword, salt, 1000, 32);
+
+    string encrypted;
+    for (unsigned i = 0; i < data.length(); i += 10) {
+        string fragment = data.substr(i, 10);
+        TWData* encryptedFragmentData = TWAESEncryptCTR(key, TWDataCreateWithHexString(TWStringCreateWithUTF8Bytes(fragment.c_str())), iv);
+        string encryptedFragment(TWStringUTF8Bytes(TWStringCreateWithHexData(encryptedFragmentData)));
+        encrypted += encryptedFragment;
+    }
+
+    TWDataDelete(hexedPassword);
+    TWDataDelete(salt);
+    TWDataDelete(iv);
+
+    return encrypted;
+}
+
+string OpenAesDecryptCtr(string encryptedData, string password) {
+    TWData* hexedPassword = TWDataCreateWithHexString(TWStringCreateWithUTF8Bytes(password.c_str()));
+    TWData* salt = TWDataCreateWithHexString(TWStringCreateWithUTF8Bytes("NaCl"));
+    TWData* iv = TWDataCreateWithHexString(TWStringCreateWithUTF8Bytes("4949494949494949"));
+
+    TWData* key = TWPBKDF2HmacSha256(hexedPassword, salt, 1000, 32);
+
+    string decrypted;
+    for (unsigned i = 0; i < encryptedData.length(); i += 10) {
+        string fragment = encryptedData.substr(i, 10);
+        TWData* decryptedFragmentData = TWAESDecryptCTR(key, TWDataCreateWithHexString(TWStringCreateWithUTF8Bytes(fragment.c_str())), iv);
+
+        string decryptedFragment(TWStringUTF8Bytes(TWStringCreateWithHexData(decryptedFragmentData)));
+        decrypted += decryptedFragment;
+    }
+
+    TWDataDelete(hexedPassword);
+    TWDataDelete(salt);
+    TWDataDelete(iv);
+
+    return decrypted;
 }

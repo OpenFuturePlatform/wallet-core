@@ -25,8 +25,7 @@ extern "C" {
 JNIEXPORT jstring JNICALL Java_io_openfuture_wallet_jni_TrustWallet_generateHDWallet
   (JNIEnv *env, jclass thisObject){
     try {
-        string mnemonicWord = OpenWalletGenerate();
-        return env->NewStringUTF(mnemonicWord.c_str());
+
     } catch (const std::exception& ex) {
         std::cout << "EXCEPTION: " << ex.what() << std::endl;
         throw ex;
