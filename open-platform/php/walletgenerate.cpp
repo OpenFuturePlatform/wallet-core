@@ -9,8 +9,9 @@
  */
 using namespace std;
 
-Php::Value wallet_generate() {
-    return OpenWalletGenerate();
+Php::Value wallet_generate(Php::Parameters& params) {
+    Php::Value coinType = params[0];
+    return OpenWalletGenerate(coinType);
 }
 
 Php::Value wallet_import(Php::Parameters& params) {
@@ -27,8 +28,22 @@ Php::Value wallet_sign(Php::Parameters& params) {
     Php::Value gasPrice = params[3];
     Php::Value gasLimit = params[4];
     Php::Value amount   = params[5];
+    Php::Value nonce   = params[6];
 
-    return OpenSignTransaction(prvKey, address, chainId, gasPrice, gasLimit, amount);
+    return OpenSignTransaction(prvKey, address, chainId, gasPrice, gasLimit, amount, nonce);
+}
+
+Php::Value wallet_sign_token(Php::Parameters& params) {
+    Php::Value prvKey   = params[0];
+    Php::Value address  = params[1];
+    Php::Value chainId  = params[2];
+    Php::Value gasPrice = params[3];
+    Php::Value gasLimit = params[4];
+    Php::Value amount   = params[5];
+    Php::Value nonce    = params[6];
+    Php::Value tokenAddress    = params[7];
+
+    return OpenSignTokenTransaction(prvKey, address, chainId, gasPrice, gasLimit, amount, nonce, tokenAddress);
 }
 
 // Symbols are exported according to the "C" language
@@ -42,6 +57,7 @@ extern "C" {
         extension.add<wallet_generate>("wallet_generate");
         extension.add<wallet_import>("wallet_import");
         extension.add<wallet_sign>("wallet_sign");
+        extension.add<wallet_sign_token>("wallet_sign_token");
 
         // return the extension module
         return extension.module();
