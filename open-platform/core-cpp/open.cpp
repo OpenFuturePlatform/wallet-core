@@ -1,11 +1,11 @@
+#include <TrustWalletCore/TWAES.h>
 #include <TrustWalletCore/TWAnySigner.h>
 #include <TrustWalletCore/TWCoinType.h>
 #include <TrustWalletCore/TWCoinTypeConfiguration.h>
 #include <TrustWalletCore/TWHDWallet.h>
+#include <TrustWalletCore/TWPBKDF2.h>
 #include <TrustWalletCore/TWPrivateKey.h>
 #include <TrustWalletCore/TWString.h>
-#include <TrustWalletCore/TWAES.h>
-#include <TrustWalletCore/TWPBKDF2.h>
 
 #include "Base32.h"
 #include "Base64.h"
@@ -130,25 +130,6 @@ string OpenSignTokenTransaction(string privateKeyStr, string toAddress, string c
     return hex(signedTransaction);
 }
 
-string OpenEncodeBase32(string rawString, string password) {
-    cout << "String to encode: '" << rawString << "'" << endl;
-    Data decoded = parse_hex(rawString);
-    string encoded = Base64::encode(decoded); // Base32::encode(decoded, password.c_str());
-    cout << "Encoded: '" << encoded << "'" << endl;
-    return encoded;
-}
-
-string OpenDecodeBase32(string encodedString, string password) {
-    cout << "String to decode: '" << encodedString << "'" << endl;
-    // Data decoded;
-    // bool res = Base32::decode(encodedString, decoded, password.c_str());
-    // string decoded_hex = hex(decoded);
-    Data decoded = Base64::decode(encodedString);
-    string decoded_hex = hex(decoded);
-    cout << "Decoded: '" << decoded_hex << "'" << endl;
-    return decoded_hex;
-}
-
 string OpenAesEncryptCtr(string data, string password) {
     TWData* hexedPassword = TWDataCreateWithHexString(TWStringCreateWithUTF8Bytes(password.c_str()));
     TWData* salt = TWDataCreateWithHexString(TWStringCreateWithUTF8Bytes("NaCl"));
@@ -159,8 +140,10 @@ string OpenAesEncryptCtr(string data, string password) {
     string encrypted;
     for (unsigned i = 0; i < data.length(); i += 10) {
         string fragment = data.substr(i, 10);
-        TWData* encryptedFragmentData = TWAESEncryptCTR(key, TWDataCreateWithHexString(TWStringCreateWithUTF8Bytes(fragment.c_str())), iv);
-        string encryptedFragment(TWStringUTF8Bytes(TWStringCreateWithHexData(encryptedFragmentData)));
+        TWData* encryptedFragmentData = TWAESEncryptCTR(
+            key, TWDataCreateWithHexString(TWStringCreateWithUTF8Bytes(fragment.c_str())), iv);
+        string encryptedFragment(
+            TWStringUTF8Bytes(TWStringCreateWithHexData(encryptedFragmentData)));
         encrypted += encryptedFragment;
     }
 
@@ -172,7 +155,8 @@ string OpenAesEncryptCtr(string data, string password) {
 }
 
 string OpenAesDecryptCtr(string encryptedData, string password) {
-    TWData* hexedPassword = TWDataCreateWithHexString(TWStringCreateWithUTF8Bytes(password.c_str()));
+    TWData* hexedPassword =
+        TWDataCreateWithHexString(TWStringCreateWithUTF8Bytes(password.c_str()));
     TWData* salt = TWDataCreateWithHexString(TWStringCreateWithUTF8Bytes("NaCl"));
     TWData* iv = TWDataCreateWithHexString(TWStringCreateWithUTF8Bytes("4949494949494949"));
 
@@ -181,9 +165,11 @@ string OpenAesDecryptCtr(string encryptedData, string password) {
     string decrypted;
     for (unsigned i = 0; i < encryptedData.length(); i += 10) {
         string fragment = encryptedData.substr(i, 10);
-        TWData* decryptedFragmentData = TWAESDecryptCTR(key, TWDataCreateWithHexString(TWStringCreateWithUTF8Bytes(fragment.c_str())), iv);
+        TWData* decryptedFragmentData = TWAESDecryptCTR(
+            key, TWDataCreateWithHexString(TWStringCreateWithUTF8Bytes(fragment.c_str())), iv);
 
-        string decryptedFragment(TWStringUTF8Bytes(TWStringCreateWithHexData(decryptedFragmentData)));
+        string decryptedFragment(
+            TWStringUTF8Bytes(TWStringCreateWithHexData(decryptedFragmentData)));
         decrypted += decryptedFragment;
     }
 

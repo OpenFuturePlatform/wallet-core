@@ -16,8 +16,8 @@ class OPEN
     /** 
      * @var string The base URL for the OPEN API.
      */
-    //public static $apiBase = 'https://api.openfuture.io/';
-    public static $apiBase = 'http://172.21.64.1:8080/public/api/v1/';
+    public static $apiBase = 'https://api.openfuture.io/public/api/v1/';
+    
 
 
     public static function getApiKey()
@@ -45,14 +45,14 @@ class OPEN
     {
         $generatedWallet = wallet_generate($coinType);
 
-        // $timeStamp = self::get_timestamp();
-        // $args = array(
-        //     'address'   => $generatedWallet[0],
-        //     "blockchain" => self::get_coin($coinType),
-        //     'timestamp' => strval($timeStamp),
-        // );
-        // $hash = self::get_signature($args);
-        // self::send_request("wallet/save", $hash, $args);
+        $timeStamp = self::get_timestamp();
+        $args = array(
+            'address'   => $generatedWallet[0],
+            "blockchain" => self::get_coin($coinType),
+            'timestamp' => strval($timeStamp),
+        );
+        $hash = self::get_signature($args);
+        self::send_request("wallet/save", $hash, $args);
 
         return $generatedWallet;
     }
@@ -90,6 +90,16 @@ class OPEN
         );
         $hash = self::get_signature($args);
         return self::send_request("wallet/broadcast", $hash, $args);
+    }
+
+    public function encrypt($privateKey, $password)
+    {
+        return wallet_encrypt($privateKey, $password);
+    }
+
+    public function decrypt($data, $password)
+    {
+        return wallet_decrypt($data, $password);
     }
 
     public static function get_timestamp(): int
