@@ -1,3 +1,0 @@
-/home/elaman/wallet-core/open-platform/test/CMakeFiles/runTests.dir
-/home/elaman/wallet-core/open-platform/test/CMakeFiles/edit_cache.dir
-/home/elaman/wallet-core/open-platform/test/CMakeFiles/rebuild_cache.dir

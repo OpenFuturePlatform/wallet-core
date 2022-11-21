@@ -13,6 +13,7 @@ endif ()
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=native -DCRYPTOPP_DISABLE_SHA")
 
 set (CMAKE_C_STANDARD 11)
 set (CMAKE_C_STANDARD_REQUIRED ON)
@@ -31,7 +32,7 @@ else ()
     message ("TrustWalletCore library found here: ${WALLET_CORE_LIB_FILE}")
 endif ()
 
-file(GLOB_RECURSE sources "*.cpp" "*.h")
+file(GLOB_RECURSE sources "open.cpp" "open.h" "header.hpp")
 add_library(OpenWallet SHARED ${sources})
 
 target_include_directories(OpenWallet PRIVATE ${WALLET_CORE}/include ${WALLET_CORE}/src ${WALLET_CORE}/build/local/include ${WALLET_CORE}/trezor-crypto/include)

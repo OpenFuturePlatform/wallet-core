@@ -53,6 +53,38 @@ JNIEXPORT jstring JNICALL Java_io_openfuture_wallet_jni_TrustWallet_importPrivat
 
 /*
  * Class:     io_openfuture_wallet_jni_TrustWallet
+ * Method:    encryptAes
+ * Signature: (Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+ */
+JNIEXPORT jstring JNICALL Java_io_openfuture_wallet_jni_TrustWallet_encryptAes
+  (JNIEnv *env, jclass, jstring jData, jstring jPassword) {
+    jboolean isCopy;
+    const char *convertedValue = (env)->GetStringUTFChars(jData, &isCopy);
+    std::string data = convertedValue;
+    const char *convertedPasswordValue = (env)->GetStringUTFChars(jPassword, &isCopy);
+    std::string password = convertedPasswordValue;
+    string encrypted = OpenAesEncryptCtr(data, password);
+    return env->NewStringUTF(encrypted.c_str());
+}
+
+/*
+ * Class:     io_openfuture_wallet_jni_TrustWallet
+ * Method:    decryptAes
+ * Signature: (Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+ */
+JNIEXPORT jstring JNICALL Java_io_openfuture_wallet_jni_TrustWallet_decryptAes
+  (JNIEnv *env, jclass, jstring jEncryptedData, jstring jPassword){
+    jboolean isCopy;
+    const char *convertedEncryptedDataValue = (env)->GetStringUTFChars(jEncryptedData, &isCopy);
+    std::string encryptedData = convertedEncryptedDataValue;
+    const char *convertedPasswordValue = (env)->GetStringUTFChars(jPassword, &isCopy);
+    std::string password = convertedPasswordValue;
+    string decrypted = OpenAesEncryptCtr(encryptedData, password);
+    return env->NewStringUTF(decrypted.c_str());
+}
+
+/*
+ * Class:     io_openfuture_wallet_jni_TrustWallet
  * Method:    signTransaction
  * Signature: (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;JJJ)Ljava/lang/String;
  */
