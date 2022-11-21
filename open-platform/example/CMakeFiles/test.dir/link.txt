@@ -1,1 +1,0 @@
-/usr/bin/c++ -O3 -DNDEBUG CMakeFiles/test.dir/test.cpp.o -o test   -L/home/elaman/wallet-core/open-platform/example/../../open-platform/core-cpp  -Wl,-rpath,/home/elaman/wallet-core/open-platform/example/../../open-platform/core-cpp -lOpenWallet 
