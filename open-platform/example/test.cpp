@@ -20,10 +20,9 @@ int main() {
         cout << "Derived address    : " << address << endl;
         const string dummyReceiverAddress = "0xC37054b3b48C3317082E7ba872d7753D13da4986";
         string signature = OpenSignTransaction(privateKey, dummyReceiverAddress, "01", 3600000000, 21000, 924400000000000);
-        //std::cout << "'" << signature << "'" << std::endl;
 
         string encrypted = OpenAesEncryptCtr("ace5e6e1b60a3f8c37445377d97b3ba30d99e8de012af9c305d78e40db3dda73", "password");
-        cout << "En: " << encrypted << endl;
+        cout << encrypted << endl;
         string decrypted = OpenAesDecryptCtr(encrypted, "password");
         cout << decrypted << endl;
     } catch (const std::exception& ex) {
