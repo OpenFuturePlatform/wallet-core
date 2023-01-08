@@ -58,7 +58,7 @@ SET (CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${PLATFORM_LINK_FLAGS}")
 
 find_package(JNI REQUIRED)
 include_directories(${JNI_INCLUDE_DIRS})
-set(SOURCE_FILES TrustWallet.cpp)
+set(SOURCE_FILES TrustWallet.cpp Aes.cpp)
 add_library(trust-core-jvm SHARED ${SOURCE_FILES})
 
 target_link_libraries (trust-core-jvm OpenWallet TrustWalletCore TrezorCrypto protobuf pthread ${PLATFORM_LIBS})

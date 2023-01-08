@@ -99,7 +99,7 @@ JNIEXPORT jstring JNICALL Java_io_openfuture_wallet_jni_TrustWallet_signTransact
         const char *convertedChainId = (env)->GetStringUTFChars(jChainId, &isCopy);
         std::string chainId = convertedChainId;
 
-        string signature = OpenSignTransaction(privateKey, address, chainId, jGasPrice, jGasLimit, jAmount);
+        string signature = OpenSignTransaction(privateKey, address, chainId, jGasPrice, jGasLimit, jAmount, 0);
         return env->NewStringUTF(signature.c_str());
     } catch (const std::exception& ex) {
         std::cout << "EXCEPTION: " << ex.what() << std::endl;
